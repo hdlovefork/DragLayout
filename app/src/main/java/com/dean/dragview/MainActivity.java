@@ -30,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
         mDragViewLayout.setOnStatusChangedListener(new DragLayout.OnStatusChangedListener() {
             @Override
             public void onOpened(View view) {
+                //菜单被打开
             }
 
             @Override
             public void onClosed(View view) {
+                //菜单被关闭
+                //主面板头像左右晃动
                 ObjectAnimator animator=ObjectAnimator.ofFloat(ivHead,"translationX",15);
                 animator.setInterpolator(new CycleInterpolator(5));
                 animator.setDuration(500);
@@ -42,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStatusChanging(View view, float percent) {
+                //正在拖动菜单面板
                 ivHead.setAlpha(1 - percent+0.3f);
             }
         });
         lvMain.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Cheeses.NAMES));
         lvMenu.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Cheeses.sCheeseStrings) {
+            //修改菜单栏的文字为白色
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view=super.getView(position, convertView, parent);
